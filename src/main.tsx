@@ -3,7 +3,6 @@ import {BrowserRouter,Routes, Route } from 'react-router-dom';
 import Login from './pages/Login.tsx';
 import PostDetails from './pages/PostDetails.tsx';
 import Posts from './pages/Posts.tsx'
-import NoPage from './pages/NoPage.tsx';
 import EditPost from "./pages/EditPost";
 import App from "./App.tsx";
 import CreatePost from "./pages/createPost.tsx";
@@ -20,7 +19,6 @@ ReactDom.createRoot(document.getElementById('root') as HTMLElement).render(
 <Route path='posts/:id' element={<PostDetails/>}/>
 <Route path='edit/:id' element={<EditPost/>}/>
 <Route path='CreatePost' element={<CreatePost/>}/>
-<Route path='*' element={<NoPage/>}/>
 
 </Route>
 

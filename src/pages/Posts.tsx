@@ -27,26 +27,31 @@ function Posts() {
     const customPosts = updatedPosts.filter((p) => p.isCustom);
     localStorage.setItem("posts", JSON.stringify(customPosts));
   };
-  return (
-    <div>
-      <h2>Posts</h2>
-      <Link to="/createPost">Create New Post</Link>
-      <ul>
-        {posts.map((post) => (
-          <li key={post.id}>
-            <Link to={`/posts/${post.id}`}>
-              <h3>{post.title}</h3>
-            </Link>
-            <p>{post.body}</p>
-              <>
-                <button onClick={() => navigate(`/edit/${post.id}`)}>Edit</button>
-                <button onClick={() => handleDelete(post.id)}>Delete</button>
-              </>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+return (
+  <div style={{ maxWidth: "600px", margin: "20px auto", padding: "20px", background: "#355ba2ff", borderRadius: "8px" }}>
+    <h2 style={{ textAlign: "center", color: "#333" }}>Posts</h2>
+    <Link to="/createPost" style={{ display: "inline-block", marginBottom: "15px", textDecoration: "none", color: "white", background: "#007bff", padding: "8px 12px", borderRadius: "4px" }}>
+      Create New Post
+    </Link>
+    <ul style={{ listStyle: "none", padding: 0 }}>
+      {posts.map((post) => (
+        <li key={post.id} style={{ background: "#6897cdff", marginBottom: "10px", padding: "10px", borderRadius: "5px", boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)" }}>
+          <Link to={`/posts/${post.id}`} style={{ textDecoration: "none", color: "#007bff" }}>
+            <h3>{post.title}</h3>
+          </Link>
+          <p>{post.body}</p>
+          {post.isCustom && (
+            <>
+              <button onClick={() => navigate(`/edit/${post.id}`)} style={{ marginRight: "10px", padding: "5px 10px" }}>Edit</button>
+              <button onClick={() => handleDelete(post.id)} style={{ padding: "5px 10px" }}>Delete</button>
+            </>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
 }
 
 export default Posts;

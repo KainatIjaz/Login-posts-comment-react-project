@@ -19,43 +19,49 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "20px auto" }}>
-      <h2>Sign In / Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+  <div style={{ maxWidth: "500px", margin: "50px auto", padding: "20px", background: "#355ba2ff", borderRadius: "10px", textAlign: "center" }}>
+    <h2>Sign In / Sign Up</h2>
+    <form onSubmit={handleSubmit}>
+      <div style={{ marginBottom: "10px" }}>
+        <label>Name:</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          style={{ display: "block", width: "90%", padding: "8px", marginTop: "5px" }}
+        />
+      </div>
 
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <div style={{ marginBottom: "10px" }}>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+          style={{ display: "block", width: "90%", padding: "8px", marginTop: "5px" }}
+        />
+      </div>
 
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+      <div style={{ marginBottom: "10px" }}>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          style={{ display: "block", width: "90%", padding: "8px", marginTop: "5px" }}
+        />
+      </div>
 
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  );
+      <button type="submit" style={{ padding: "8px 12px", background: "#007bff", color: "white", border: "none", borderRadius: "4px" }}>
+        Login
+      </button>
+    </form>
+  </div>
+);
+
 }
 
 export default Login;

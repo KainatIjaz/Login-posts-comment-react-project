@@ -89,59 +89,99 @@ function PostDetails() {
   };
 
   if (!post) return <p>Loading post</p>;
+return (
+  <div
+    style={{
+      maxWidth: "600px",
+      margin: "20px auto",
+      padding: "20px",
+      background: "#355ba2ff",
+      borderRadius: "8px",
+    }}
+  >
+    <h2 style={{ textAlign: "center" }}>{post.title}</h2>
+    <p>{post.body}</p>
 
-  return (
-    <div>
-      <h2>{post.title}</h2>
-      <p>{post.body}</p>
+    <h3>Comments</h3>
 
-      <h3>Comments</h3>
+    {/* Show comment form only if user is logged in */}
+    {user ? (
+      <div style={{ marginBottom: "20px" }}>
+        <h4>{editId ? "Edit Comment" : "Add a Comment"}</h4>
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          style={{ display: "block", width: "100%", marginBottom: "10px", padding: "8px" }}
+        />
+        <input
+          type="email"
+          placeholder="Your Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ display: "block", width: "100%", marginBottom: "10px", padding: "8px" }}
+        />
+        <textarea
+          placeholder="Your Comment"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          style={{ display: "block", width: "100%", marginBottom: "10px", padding: "8px" }}
+        />
+        <button
+          onClick={handleAddOrUpdateComment}
+          style={{
+            padding: "8px 12px",
+            background: "#28a745",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+          }}
+        >
+          {editId ? "Update Comment" : "Submit Comment"}
+        </button>
+      </div>
+    ) : (
+      <p style={{ color: "red" }}>Please log in to add comments.</p>
+    )}
 
-      {/* comment form will only be shown if user is logged in */}
-      {user ? (
-        <div>
-          <h4>{editId ? "Edit Comment" : "Add a Comment"}</h4>
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <textarea
-            placeholder="Your Comment"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-          <button onClick={handleAddOrUpdateComment}>
-            {editId ? "Update Comment" : "Submit Comment"}
-          </button>
-        </div>
-      ) : (
-        <p>Please log in to add comments</p>
-      )}
+    {/* Display Comments */}
+    <ul style={{ listStyle: "none", padding: 0 }}>
+      {comments.map((comment) => (
+        <li
+          key={comment.id}
+          style={{
+            background: "#6897cdff",
+            marginBottom: "10px",
+            padding: "10px",
+            borderRadius: "5px",
+          }}
+        >
+          <strong>{comment.name}</strong> ({comment.email})
+          <p>{comment.body}</p>
+          {comment.isCustom && user && (
+            <>
+              <button
+                onClick={() => handleEdit(comment)}
+                style={{ marginRight: "10px", padding: "5px 10px" }}
+              >
+                Edit
+              </button>
+              <button
+                onClick={() => handleDelete(comment.id)}
+                style={{ padding: "5px 10px" }}
+              >
+                Delete
+              </button>
+            </>
+          )}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
 
-      <ul>
-        {comments.map((comment) => (
-          <li key={comment.id}>
-            <strong>{comment.name}</strong> ({comment.email})
-            <p>{comment.body}</p>
-            {user && comment.isCustom && (
-              <>
-                <button onClick={() => handleEdit(comment)}>Edit</button>
-                <button onClick={() => handleDelete(comment.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+
 }
 
 export default PostDetails;
