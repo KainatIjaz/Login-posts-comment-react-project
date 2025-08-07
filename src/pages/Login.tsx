@@ -14,7 +14,7 @@ function Login() {
     const user = { name, email };
     localStorage.setItem("user", JSON.stringify(user));
 
-    alert("Login successful!");
+    alert("Login successful!");// for pop up
     navigate("/posts"); 
   };
 
